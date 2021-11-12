@@ -14,10 +14,11 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index')->name('index');
 
 Auth::routes();
 
-Route::get('/admin', 'HomeController@index')->name('admin');
+Route::middleware('auth')->namespace('Admin')->prefix('admin')->name('admin.')
+    ->group(function() {
+        Route::get('/', 'HomeController@index')->name('index');
+    });
