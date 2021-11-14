@@ -39,6 +39,11 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required'
+        ]);
+
         $form_data = $request->all();
 
         $new_post = new Post();
@@ -57,7 +62,7 @@ class PostController extends Controller
 
         $new_post->slug = $slug;
         $new_post->save();
-        return redirect()->route('admin.posts.index')->with('inserted', 'Il post è stato correttamente salvato');
+        return redirect()->route('admin.posts.index')->with('status', 'Il post è stato correttamente salvato');
     }
 
     /**
@@ -99,6 +104,11 @@ class PostController extends Controller
      */
     public function update(Request $request, Post $post)
     {
+        $request->validate([
+            'title' => 'required|max:255',
+            'content' => 'required'
+        ]);
+
         $form_data = $request->all();
 
         if($form_data['title'] != $post->title) {
@@ -117,7 +127,7 @@ class PostController extends Controller
         }
 
         $post->update($form_data);
-        return redirect()->route('admin.posts.index')->with('updated', 'Post correttamente aggiornato');
+        return redirect()->route('admin.posts.index')->with('status', 'Post correttamente aggiornato');
     }
 
     /**
@@ -129,6 +139,6 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return redirect()->route('admin.posts.index')->with('deleted', 'Post eliminato');
+        return redirect()->route('admin.posts.index')->with('status', 'Post eliminato');
     }
 }

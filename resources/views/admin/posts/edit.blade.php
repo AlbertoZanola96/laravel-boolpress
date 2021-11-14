@@ -11,11 +11,17 @@
                 
                 <div class="form-group">
                     <label for="title">Titolo</label>
-                    <input type="text" name="title" class="form-control" value="{{ $post->title }}">
+                    <input type="text" name="title" class="form-control @error('title') is-invalid @enderror" value="{{ old('title', $post->title) }}">
+                    @error('title')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="content">Contenuto</label>
-                    <textarea class="form-control" name="content" id="content">{!! $post->content !!}</textarea>
+                    <textarea class="form-control @error('content') is-invalid @enderror" name="content" id="content">{!! old('content', $post->content) !!}</textarea>
+                    @error('content')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <button type="submit" class="btn btn-success">Modifica post</button>

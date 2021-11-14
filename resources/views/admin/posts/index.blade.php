@@ -6,6 +6,12 @@
             <li><a href="{{ route('admin.posts.show', $post->slug) }}">{{ $post->title }}</a></li>
         @endforeach
     </ul> --}}
+    @if (session('status'))
+        <div class="alert alert-success">
+            {{ session('status') }}
+        </div>
+    @endif
+
     <table class="table table-striped">
         <thead>
             <tr>
