@@ -36,7 +36,7 @@
                         class="btn btn-warning">
                         Modify
                     </a>
-                    <form class="delete-post-form" style="display: inline" method="post" action="{{ route('admin.posts.destroy', $post->id) }}">
+                    <form class="delete-post-form delete-post" style="display: inline" method="post" action="{{ route('admin.posts.destroy', $post->id) }}">
                         @csrf
                         @method('DELETE')
                         <button  type="submit" class="btn btn-danger ">Delete</button>
